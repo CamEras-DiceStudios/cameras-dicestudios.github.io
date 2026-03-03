@@ -1,0 +1,292 @@
+/* =========================================================================
+   V4.2 "Museum-Mechanical" Design System Variables for Web
+   ========================================================================= */
+:root {
+    /* ─────────────────────────────────────────────────────────────────────────────
+       THE "MUSEUM" DARK BASE
+       ───────────────────────────────────────────────────────────────────────────── */
+    --clr-obsidian: #050505;
+    --clr-gunmetal: #1A1A1A;
+    --clr-gunmetal-glossy: rgba(26, 26, 26, 0.65);
+    --clr-shadow: #000000;
+
+    /* ─────────────────────────────────────────────────────────────────────────────
+       THE "MECHANICAL" METALS
+       ───────────────────────────────────────────────────────────────────────────── */
+    --clr-chrome-high: #E0E0E0;
+    --clr-chrome-mid: #B0B0B0;
+    --clr-chrome-low: #505050;
+
+    /* ─────────────────────────────────────────────────────────────────────────────
+       THE "COHESIVE" ACCENTS
+       ───────────────────────────────────────────────────────────────────────────── */
+    --clr-champagne: #F3E5AB;
+    --clr-matte-maroon: #6D213C;
+
+    /* ─────────────────────────────────────────────────────────────────────────────
+       Gradients & Shadows
+       ───────────────────────────────────────────────────────────────────────────── */
+    --gradient-metallic: linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0%, rgba(176, 176, 176, 0.6) 50%, rgba(255, 255, 255, 0.05) 100%);
+    --shadow-deep: 0 16px 32px 0 rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.05);
+
+    /* Typography */
+    --font-display: 'Share Tech', sans-serif;
+    --font-mono: 'Roboto Mono', monospace;
+}
+
+/* =========================================================================
+   Reset & Base Styles
+   ========================================================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #0A0908;
+    /* Very dark warm base, tying to champagne/obsidian */
+    color: var(--clr-chrome-mid);
+    font-family: var(--font-mono);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    position: relative;
+    /* Subtle mechanical background pattern */
+    background-image: radial-gradient(rgba(243, 229, 171, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: center;
+}
+
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Gradient from subtle champagne at center down to deep obsidian */
+    background: radial-gradient(circle at 50% 30%, rgba(243, 229, 171, 0.08) 0%, rgba(26, 26, 26, 0.8) 40%, var(--clr-obsidian) 100%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* =========================================================================
+   Layout & Contains
+   ========================================================================= */
+.container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* =========================================================================
+   Glassmorphism Card
+   ========================================================================= */
+.glass-card {
+    background: var(--clr-gunmetal-glossy);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 3rem;
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+    box-shadow: var(--shadow-deep);
+    position: relative;
+    overflow: hidden;
+    animation: floatingCard 6s ease-in-out infinite;
+    transform-style: preserve-3d;
+}
+
+/* Highlight glow at the top edge of card */
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    width: 80%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--clr-champagne), transparent);
+    opacity: 0.5;
+}
+
+@keyframes floatingCard {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* =========================================================================
+   Logo & Typography
+   ========================================================================= */
+.logo-container {
+    margin: 0 auto 1.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.app-logo {
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    border-radius: 24px;
+    filter: drop-shadow(0 0 20px rgba(243, 229, 171, 0.2));
+    transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.glass-card:hover .app-logo {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 30px rgba(243, 229, 171, 0.4));
+}
+
+.app-subtitle {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    color: var(--clr-champagne);
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    letter-spacing: 1px;
+    line-height: 1.5;
+}
+
+.app-subtitle .highlight {
+    color: var(--clr-champagne);
+    font-weight: 500;
+}
+
+.mechanical-divider {
+    height: 2px;
+    width: 60%;
+    margin: 0 auto 1.5rem;
+    background: var(--gradient-metallic);
+    opacity: 0.8;
+}
+
+.app-description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    color: var(--clr-chrome-mid);
+}
+
+.app-description p {
+    margin-bottom: 0.75rem;
+}
+
+.app-description p:last-child {
+    margin-bottom: 0;
+}
+
+.app-description .promo-text {
+    color: var(--clr-chrome-high);
+    font-weight: 600;
+    font-size: 1.05rem;
+}
+
+.app-description .ios-note {
+    color: var(--clr-chrome-low);
+    font-size: 0.85rem;
+    margin-top: 1rem;
+}
+
+/* =========================================================================
+   Download Elements
+   ========================================================================= */
+.download-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 2.5rem;
+}
+
+.store-button {
+    display: inline-block;
+    transition: transform 0.3s ease, filter 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.store-button:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.1);
+}
+
+/* Subtle champagne glow specifically for Google Play button */
+.google-play:hover,
+.google-play:focus {
+    box-shadow: 0 0 15px rgba(243, 229, 171, 0.3);
+}
+
+.google-play:active {
+    transform: translateY(0);
+    box-shadow: 0 0 8px rgba(243, 229, 171, 0.5);
+}
+
+.google-play img {
+    height: 60px;
+    /* Standard badge height */
+    width: auto;
+}
+
+.ios-coming-soon {
+    border: 1px solid var(--clr-chrome-low);
+    background: rgba(0, 0, 0, 0.3);
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    width: 204px;
+    /* Matches Google Play badge roughly */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.coming-soon-text {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--clr-chrome-mid);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* =========================================================================
+   Tags & Footer
+   ========================================================================= */
+
+.footer {
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--clr-chrome-low);
+    position: relative;
+    z-index: 10;
+}
+
+/* =========================================================================
+   Responsive
+   ========================================================================= */
+@media (max-width: 600px) {
+    .glass-card {
+        padding: 2.5rem 1.5rem;
+        border-radius: 16px;
+    }
+
+    .app-logo {
+        max-width: 180px;
+    }
+}
